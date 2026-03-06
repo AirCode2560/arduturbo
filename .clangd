@@ -1,0 +1,27 @@
+CompileFlags:
+  Add:
+    - -target
+    - avr
+    - -nostdinc
+    - -std=gnu++20
+    - -Wall
+    - -Wextra
+    - -Wno-unused-parameter
+    - -fno-exceptions
+    - -fno-rtti
+    - -fno-threadsafe-statics
+    - -ffunction-sections
+    - -fdata-sections
+    - -mmcu=atmega2560
+    - -DF_CPU=16000000UL
+
+Index:
+  StandardLibrary: false
+
+Diagnostics:
+  ClangTidy:
+    Add:
+      - modernize-use-using
+      - modernize-pass-by-value
+Documentation:
+  CommentFormat: Doxygen
