@@ -72,17 +72,20 @@ namespace tbo::reg {
         }
     };
 
-    template<typename T>
+    template<typename T, typename U = void>
     struct IsRegister : xtd::FalseType {};
 
     template<typename T, Address addr>
-    struct IsRegister<Register<T, addr> > : xtd::TrueType {};
+    struct IsRegister<Register<T, addr>, void> : xtd::TrueType {};
 
-    template<typename T>
-    inline constexpr bool is_register_v = IsRegister<T>::value;
+    template<typename T, Address addr>
+    struct IsRegister<Register<T, addr>, T> : xtd::TrueType {};
 
-    template<typename T>
-    concept RegisterType = is_register_v<T>;
+    template<typename T, typename U = void>
+    inline constexpr bool is_register_v = IsRegister<T, U>::value;
+
+    template<typename T, typename U = void>
+    concept RegisterType = is_register_v<T, U>;
 
     // --- Bit ---
 
