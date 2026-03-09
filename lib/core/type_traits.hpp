@@ -123,6 +123,14 @@ namespace tbo::xtd {
     template<typename T, typename U>
     inline constexpr bool is_same_v = IsSame<T, U>::value;
 
+    // --- IsAnyOf ---
+
+    template<typename T, typename ...Ts>
+    struct IsAnyOf : Disjunction<IsSame<T, Ts>...> {};
+
+    template<typename T, typename ...Ts>
+    inline constexpr bool is_any_of_v = IsAnyOf<T, Ts...>::value;
+
     // --- RemoveConst ---
 
     template<typename T>
@@ -217,5 +225,28 @@ namespace tbo::xtd {
 
     template<typename T>
     using AddRvalueReference_t = typename AddRvalueReference<T>::type;
+
+    // --- IsIntegral ---
+
+    template<typename T>
+    struct IsIntegral : IsAnyOf<RemoveCV_t<T>,
+            bool,
+            char, signed char, unsigned char,
+            short, unsigned short,
+            int, unsigned int,
+            long, unsigned long,
+            long long, unsigned long long> {};
+
+    template<typename T>
+    inline constexpr bool is_integral_v = IsIntegral<T>::value;
+
+    // --- IsFloatingPoint ---
+
+    template<typename T>
+    struct IsFloatingPoint : IsAnyOf<RemoveCV_t<T>,
+            float, double, long double> {};
+
+    template<typename T>
+    inline constexpr bool is_floating_point_v = IsFloatingPoint<T>::value;
 
 }
