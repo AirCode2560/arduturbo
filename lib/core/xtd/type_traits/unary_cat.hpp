@@ -11,10 +11,27 @@
 /// @copyright (c) Saxon Murray 2026
 //===----------------------------------------------------------------------===//
 
+#include <stddef.h>
 #include "trans_cv.hpp"
 #include "rel.hpp"
 
 namespace tbo::xtd {
+
+    // --- IsVoid ---
+
+    template<typename T>
+    struct IsVoid : IsSame<RemoveCV_t<T>, void> {};
+
+    template<typename T>
+    inline constexpr bool is_void_v = IsVoid<T>::value;
+
+    // --- IsNullPointer ---
+
+    template<typename T>
+    struct IsNullPointer : IsSame<RemoveCV_t<T>, nullptr_t> {};
+
+    template<typename T>
+    inline constexpr bool is_null_pointer_v = IsNullPointer<T>::value;
 
     // --- IsIntegral ---
 

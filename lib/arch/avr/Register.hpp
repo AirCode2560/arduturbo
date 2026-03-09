@@ -12,7 +12,7 @@
 //===----------------------------------------------------------------------===//
 
 #include <stdint.h>
-#include "../../core/type_traits.hpp"
+#include "../../core/xtd/type_traits.hpp"
 
 namespace tbo::reg {
 
@@ -25,7 +25,7 @@ namespace tbo::reg {
 
     // --- Register ---
 
-    template<typename T, Address addr>
+    template<xtd::Integral T, Address addr>
     struct Register {
         using value_type = T;
         using ref_type = volatile T&;
@@ -75,10 +75,10 @@ namespace tbo::reg {
     template<typename T, typename U = void>
     struct IsRegister : xtd::FalseType {};
 
-    template<typename T, Address addr>
+    template<xtd::Integral T, Address addr>
     struct IsRegister<Register<T, addr>, void> : xtd::TrueType {};
 
-    template<typename T, Address addr>
+    template<xtd::Integral T, Address addr>
     struct IsRegister<Register<T, addr>, T> : xtd::TrueType {};
 
     template<typename T, typename U = void>
