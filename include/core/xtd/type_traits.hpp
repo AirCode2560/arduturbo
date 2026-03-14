@@ -1,6 +1,6 @@
 #pragma once
 //===----------------------------------------------------------------------===//
-// This file is part of the ArduTurbo project under the MIT license
+// This file is part of the AvrTurbo project under the MIT license
 //===----------------------------------------------------------------------===//
 /// @file type_traits.hpp
 ///
